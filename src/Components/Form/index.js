@@ -4,18 +4,21 @@ import { List } from "../List";
 import { Button } from "../Button";
 import { useState } from "react";
 
-export const Form = () => {
+export const Form = (props) => {
   const [name, SetName] = useState("");
   const [cargo, SetCargo] = useState("");
   const [imagem, SetImagem] = useState("");
   const [time, SetTime] = useState("");
 
 
-  const times = ["Programação", "Front", "back", "fullStack"];
-
   const Saved = (e) => {
     e.preventDefault();
-    console.log(name, cargo, imagem, time)
+    props.aoNovoColaborador({
+      name,
+      cargo,
+      imagem,
+      time
+    })
   };
 
   return (
@@ -46,7 +49,7 @@ export const Form = () => {
         />
         <List required={true} 
           label="Time" 
-          itens={times} 
+          itens={props.times} 
           value={time}
           changed={value => SetTime(value)}
         />
